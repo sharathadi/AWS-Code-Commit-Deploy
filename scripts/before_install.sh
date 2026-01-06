@@ -1,15 +1,17 @@
 #!/bin/bash
+set -e
 
-#download node and npm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-. ~/.nvm/nvm.sh
-nvm install node
+echo "===== BeforeInstall ====="
 
-#create our working directory if it doesnt exist
-DIR="/home/ec2-user/express-app"
-if [ -d "$DIR" ]; then
-  echo "${DIR} exists"
-else
-  echo "Creating ${DIR} directory"
-  mkdir ${DIR}
-fi
+# Install Node.js (Amazon Linux 2023 safe)
+curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
+yum install -y nodejs
+
+# Install PM2 globally
+npm install -g pm2
+
+# Create app directory
+mkdir -p /home/ec2-user/express-app
+chown -R ec2-user:ec2-user /home/ec2-user/express-app
+
+echo "===== BeforeInstall completed ====="
