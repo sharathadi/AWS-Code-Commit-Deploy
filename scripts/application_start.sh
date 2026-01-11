@@ -3,7 +3,7 @@ set -e
 
 echo "===== ApplicationStart ====="
 
-cd /home/ec2-user/express-app
+cd /home/ubuntu/express-app
 
 # Install dependencies
 npm install
